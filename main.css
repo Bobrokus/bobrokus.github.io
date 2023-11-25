@@ -6,9 +6,10 @@
 
     --shadow-color: black;
 
-    --elevated-bg-color: rgb(18, 18, 23);
+    --elevated-bg-color: rgba(18, 18, 23, 0.5);
     --main-bg-color: rgb(18, 18, 23);
-    font-size: 1.5em;
+    font-size: 2em;
+    
 }
 
 body {
@@ -35,59 +36,134 @@ body {
 @keyframes fade-out {
     from {
         opacity: 1;
-        transform: translateY(-0.3em) scale(1);
+        transform: translateY(0) scale(1);
+    }
+
+    70% {
+        opacity: 0;
     }
 
     to {
         opacity: 0;
-        transform: translateY(1em) scale(1.2);
+        transform: translateY(70vh) scale(1);
+    }
+}
+
+@keyframes shrink-title {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.2);
+    }
+}
+
+@keyframes shrink-subtitle {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.01);
     }
 }
 
 p,
 h1,
 h2,
+h3,
 nav {
-    animation: linear fade-in;
+    position: relative;
+    z-index: 2;
+
+    animation: ease-in fade-in;
     animation-timeline: view();
     animation-range: 0 40%;
 }
 
-.intro {
-    z-index: -1;
+.pretty {
+    font-family: "Pacifico", sans-serif;
+    font-weight: lighter;
+}
+
+.muted {
+    color: var(--muted-text-color)
+}
+
+#intro-title {
+
+    z-index: -2;
+
+    font-family:Arial, Helvetica, sans-serif;
 
     font-weight: 900;
-    font-size: 20rem;
-    color: aqua;
+    font-size: 15rem;
+    color: rgb(50, 255, 255);
 
     position: relative;
 
+    line-height: 0.2;
+
+    animation: ease-in-out shrink-title both;
+    animation-timeline: view();
+    animation-range: 60% 150%;
+}
+
+#intro-subtitle {
+
+    z-index: -1;
+
+    font-weight: lighter;
+    font-style: italic;
+    font-size: 5rem;
+
+    position: relative;
+
+    font-family: "Pacifico", sans-serif;
+
+    animation: none;
+
+    animation: ease-in-out shrink-subtitle both;
+    animation-timeline: view();
+    animation-range: 60% 150%;
+}
+
+#intro {
+    margin: 10rem 0rem 6rem 0rem;
+}
+
+.fading-out {
     animation: linear fade-out both;
     animation-timeline: view();
-    animation-range: 20rem 50rem;
-
-    line-height: 10rem;
+    animation-range: 60% 150%;
 }
 
 .elevated {
+    position: relative;
+    z-index: 2;
+
+
     background-color: var(--elevated-bg-color);
 
     /* box-shadow: 0em 0em 2em var(--shadow-color); */
 
     border-radius: 2rem;
-    border: thin solid var(--muted-text-color);
+    /* border: thin solid var(--muted-text-color); */
 
     padding: 0.05rem 1rem;
     margin: 5% 15%;
+
+    backdrop-filter: blur(25px);
 }
 
+#intro-title,
+#intro-subtitle,
 .centered,
 .navigation {
     text-align: center;
     align-items: center;
 }
-
-.navigation {}
 
 .text-button {
 
@@ -110,6 +186,7 @@ nav {
     border-radius: 1rem;
 
     border: thin solid var(--muted-text-color);
+    font-style: italic;
 
     text-decoration: none;
 
